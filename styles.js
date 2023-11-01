@@ -367,7 +367,14 @@ export const styles = {
     photoEmptyView: {
         borderWidth: 2,
         borderRadius: 10,
-        borderColor: colors[mode].fgColorLighter,
+        borderColor: colors["light"].fgColorLighter,
+        borderStyle: "dashed",
+        height: height / 1.8
+    },
+    photoEmptyViewDark: {
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: colors["dark"].fgColorLighter,
         borderStyle: "dashed",
         height: height / 1.8
     },

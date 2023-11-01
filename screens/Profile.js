@@ -37,7 +37,7 @@ function Profile( {photoState, setPhotoState, text, onChangeText} ) {
                 </View>
             );
         } else {
-            return <View style={styles.photoEmptyView} />;
+            return <View style={colorScheme == "dark" ? styles.photoEmptyViewDark : styles.photoEmptyView} />;
         }
     }
 

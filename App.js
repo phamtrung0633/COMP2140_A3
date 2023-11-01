@@ -8,7 +8,7 @@ import icons from './data/icons';
 import Map from './screens/Map';
 import Profile from './screens/Profile';
 import MusicNearby from './screens/MusicNearby'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 function TabIcon({ focused, icon, heightIcon, widthIcon }) {
   return (
