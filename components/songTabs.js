@@ -6,8 +6,21 @@ import { colors } from '../styles';
 import images from "../data/images.js"
 import icons from '../data/icons';
 import { useIsFocused } from "@react-navigation/native";
+
+//The color scheme of the mobile phone
 const colorScheme = Appearance.getColorScheme()
+
+/**
+ * The Song Tab component storing a single song's tab and can navigate to that song's page
+ *
+ * @param item - The song for the component
+ * @param navigation - Used to navigate to different screens
+ * @param locationName - The name of the location this song belongs to
+ * @param isFocused - Whether the song tabs screen is being focused
+ * @returns "SongTab" component
+ */
 function SongTab( { item, navigation, locationName, isFocused } ) {
+    //This function is used to navigate to the "item" song's page
     function traverseToSongPage(locationName, songId, name, recording_data, instrument) {
         navigation.navigate('TrackPage', {
             locationName: locationName,
@@ -17,8 +30,11 @@ function SongTab( { item, navigation, locationName, isFocused } ) {
             instrument: instrument
         });
     }
+    //This state stores the rating for this song
     const [rating, setRating] = useState(0)
+    //Rating array is used to create 5 rating stars
     const ratingArray = [1, 2, 3, 4, 5]
+    //Fetch the rating of this song whenever the component is rendered
     useEffect(() => {
         const url = `https://comp2140.uqcloud.net/api/samplerating/?api_key=SREr2lsVOu&sample_id=${item.id}`
         async function get_rating() {
@@ -31,6 +47,9 @@ function SongTab( { item, navigation, locationName, isFocused } ) {
         get_rating()
         
     }, [])
+    //Fetch the rating of this song whenever "isFocused" changes, this is used to updates the song's
+    //rating in the case its rating has been changed within the "TrackPage", this way whenever the SongTabs
+    //parent screen is navigated to, all ratings are updated again
     useEffect(() => {
         const url = `https://comp2140.uqcloud.net/api/samplerating/?api_key=SREr2lsVOu&sample_id=${item.id}`
         async function get_rating() {
@@ -41,7 +60,6 @@ function SongTab( { item, navigation, locationName, isFocused } ) {
             }
         }
         get_rating()
-        
     }, [isFocused])
     return (
         <View style={{flex: 1, paddingLeft: 6, paddingRight: 6}}>
@@ -72,7 +90,18 @@ function SongTab( { item, navigation, locationName, isFocused } ) {
     )
 }
 
+/**
+ * The Song Tabs component storing a tabs for all the songs belonging to a location
+ *
+ * @param navigation - Used to navigate to different screens
+ * @param locationName - The name of the location this song belongs to
+ * @param route - The route parameters 
+ * @param songs - The songs for this component to render
+ * @param musicNearby - The state determining whether there's a location nearby 100 meters that potentially can have songs 
+ * @returns "SongTabs" component
+ */
 function SongTabs( { navigation, route, songss, locationName, musicNearby } ) {
+    //This is used to determine if the screen is being focused or not, to update the songs' ratings
     const isFocused = useIsFocused()
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colorScheme == "dark" ? "#800080" : colors.whiteColorTranslucent }}>

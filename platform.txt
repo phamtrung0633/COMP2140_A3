@@ -1,0 +1,26 @@
+The platform that this app is developed in is IOS, with the use of EXPO
+
+THERE ARE SOME SPECIAL NOTICES FOR MY ASSIGNMENT, PLEASE READ...
+
+1. Due to the code used to ask for user's location permission and track user 's location 
+from the contact has issue, it results in a situation where I am able to fix all problems
+however you can only allow permission "ONCE" instead of "ALWAYS/WHILE USING APP" to make
+it work. Meaning when asked location permission, PLEASE choose "Allow Once" instead of "ALWAYS" or
+"WHILE USING APP", otherwise the permission fetched for next time opening the app WILL NOT be "Allowed"
+even thought "Always"/"While using app" is chosen. I have not been able to figure out this problem, and more
+importantly Aneesha on an ED post has allowed me to do this and she is ok with this because it is mainly
+due to the contact's code being erronous for EXPO. 
+Therefore PLEASE CHOOSE "ALLOW ONCE" whenever asked for location permission
+
+2. I have not put a lot of data into the API "sampletolocation" therefore to make it easy when testing,
+set the simulator position to be 
+Latitude: -27.464782
+Longitude: 153.029858
+This is the only location the has songs within at the moment in my API
+Feel free to add more songs to my API's locations, with a special notice,
+when adding songs to locations, you should add the songs that already existed and created in my API's songs,
+as I store songs in a different format...
+
+3. The app was tested and develop with IPHONE 13 and IPHONE 15, I have not tested the layout
+of the app in different Iphones, this may result in the app's layout being different or not User-friendly
+in other phones as this course does not focus on CSS and I am not confident about my CSS's styling based on pixels, etc.

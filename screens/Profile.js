@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { SafeAreaView, ScrollView, View, Image, Text, Button, Appearance, TouchableOpacity, TextInput } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import { styles } from "../styles.js";
-
 import { colors } from '../styles';
-// Get the screen width and height for styling
-
+//The color scheme of this mobile phone
 const colorScheme = Appearance.getColorScheme()
+/**
+ * The Profile screen
+ *
+ * @param musicNearby - The music nearby state which is a boolean 
+ * @param setPhotoState - The set function used to set the state storing the user's photo
+ * @param text - The user's profile name
+ * @param onChangeText - The set function used to set the user's profile name state
+ * @returns "Profile" screen component
+ */
 function Profile( {photoState, setPhotoState, text, onChangeText} ) {
     // Function to handle photo selection using the Image Picker
     async function handleChangePress() {
@@ -40,8 +47,6 @@ function Profile( {photoState, setPhotoState, text, onChangeText} ) {
             return <View style={colorScheme == "dark" ? styles.photoEmptyViewDark : styles.photoEmptyView} />;
         }
     }
-
-    // Main render of the App component
     return (
         <SafeAreaView style={{backgroundColor: colorScheme == "dark" ? "#800080" : colors.whiteColorTranslucent}}>
             <View style={{padding: 20}}>

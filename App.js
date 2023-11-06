@@ -10,6 +10,17 @@ import Profile from './screens/Profile';
 import MusicNearby from './screens/MusicNearby'
 import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+
+/**
+ * The Tab Icon component for Bottom tab navigation except Music Nearby
+ *
+ * @param focused - Whether the tab is currently focused
+ * @param icon - The icon for this tab
+ * @param heightIcon - The height of the icon
+ * @param widthIcon - The width of the icon for this tab
+ * @returns "TabIcon" component
+ */
 function TabIcon({ focused, icon, heightIcon, widthIcon }) {
   return (
     <View
@@ -33,7 +44,13 @@ function TabIcon({ focused, icon, heightIcon, widthIcon }) {
   );
 }
 
-
+/**
+ * The Tab Icon component for Music Nearby page
+ *
+ * @param focused - Whether the tab is currently focused
+ * @param musicNearby - Whether there's a location that might contain music nearby
+ * @returns "MusicTabIcon" component
+ */
 function MusicTabIcon( { focused, musicNearby } ) {
   return (
     <View
@@ -64,7 +81,10 @@ function MusicTabIcon( { focused, musicNearby } ) {
   );
 }
 
+// This is the bottom tab navigator
 const Tab = createBottomTabNavigator();
+
+// This function returns the options for the bottom tabs
 function tabOptions(icon, heightIcon=30, widthIcon=30) {
   return {
     tabBarIcon: ({ focused }) => <TabIcon focused={focused} icon={icon} heightIcon={heightIcon} widthIcon={widthIcon}  />,
@@ -77,10 +97,16 @@ function tabOptions(icon, heightIcon=30, widthIcon=30) {
   };
 }
 export default function App() {
+  // The state determining if there's a location with potential music nearby
   const [musicNearby, setMusicNearby] = useState(false)
+  // The state storing the location nearby
   const [locationNearby, setLocationNearby] = useState(null)
+  // The state storing the profile photo of the user
   const [photoState, setPhotoState] = useState({});
+  // The state storing the profile name of the user
   const [text, onChangeText] = useState();
+
+  //This return the tab navigator for three pages - Map, Music Nearby, Profile
   return ( 
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>

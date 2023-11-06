@@ -7,9 +7,19 @@ import { getDistance } from "geolib";
 import * as Location from 'expo-location';
 import { customMapStyle } from "../styles.js";
 
+/**
+ * The Map screen component
+ *
+ * @param setMusicNearby - The set function for music nearby state
+ * @param setLocationNearby - The set function for the location nearby state
+ * @returns "Map" component
+ */
 function Map({ setMusicNearby, setLocationNearby }) {
+    //The color scheme of the mobile phone
     const colorScheme = Appearance.getColorScheme();
+    //The URL used to fetch the locations to be displayed in the map
     const url = "https://comp2140.uqcloud.net/api/location/?api_key=SREr2lsVOu"
+    //The variable storing the inital state of the Map screen
     const initialMapState = {
         locationPermission: false,
         locations: [],
@@ -19,10 +29,14 @@ function Map({ setMusicNearby, setLocationNearby }) {
         },
         nearbyLocation: {}
     };
+    //The hook used to ask the user for permission to track location
     const [permission, askPermission] = Location.useForegroundPermissions()
+    //The state storing the Map screen details
     const [mapState, setMapState] = useState(initialMapState)
     useEffect(() => {
+        //Ask user for tracking location permission
         askPermission();
+        //Fetch the map's locations from the API
         fetch(url)
             .then((response) => response.json())
             .then((result) => {
@@ -39,7 +53,9 @@ function Map({ setMusicNearby, setLocationNearby }) {
                 })
             })
     }, [])
+    //Use ref hook used for keeping reference to the "unsubscribe" returned from Location's watch position async promise
     const listener = useRef(null)
+    //The hook used to set the map's location permission when user allows
     useEffect(() => {
         if (permission?.granted) {
             setMapState({
@@ -48,6 +64,8 @@ function Map({ setMusicNearby, setLocationNearby }) {
             })
         }
       }, [permission]);
+
+    //The hook used to start tracking user when permission is granted
     useEffect(() => {
         // Function to retrieve location nearest to current user location
         function calculateDistance(userLocation) {
@@ -66,6 +84,7 @@ function Map({ setMusicNearby, setLocationNearby }) {
             });
             return nearestLocations.shift();
         }
+        //Track the user's real time location and update the nearby location/music along the way
         if(mapState.locationPermission) {
             Location.watchPositionAsync(
                 {
@@ -100,9 +119,6 @@ function Map({ setMusicNearby, setLocationNearby }) {
             };
         }
     }, [mapState.locationPermission]);
-
-
-
     return (
         <>
             <MapView 
