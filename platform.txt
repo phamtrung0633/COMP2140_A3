@@ -1,4 +1,4 @@
-The platform that this app is developed in is IOS, with the use of EXPO
+The platform that this app is developed in EXPO, and tested in Iphones
 
 THERE ARE SOME SPECIAL NOTICES FOR MY ASSIGNMENT, PLEASE READ...
 
